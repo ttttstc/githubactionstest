@@ -1,0 +1,21 @@
+name: Architecture Guard Offline Test
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  arch-check:
+    runs-on: ubuntu-latest
+    permissions:
+          pull-requests: write # 授予评论 PR 的权限
+          contents: read       # 授予读取代码的权限
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Architecture Guard (Offline Mode)
+        uses: ttttstc/architecture-guard-action@main
+        
+        with:
+          engine: 'builtin'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
